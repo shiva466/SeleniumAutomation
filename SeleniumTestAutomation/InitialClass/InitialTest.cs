@@ -5,20 +5,37 @@ namespace SeleniumTestAutomation.InitialClass
 {
     public class InitialTest
     {
-        public IWebDriver driver;
+        [TestFixture]
+        public class SeleniumTests
+        {
+            private IWebDriver driver;
+            private HomePage homePage;
+            private ModernPage modernWorkPage;
 
-        [OneTimeSetUp]
-        public void Initialise()
-        {
-            // Create a new instance of the Chrome driver
-            driver = new ChromeDriver();
-            driver.Manage().Window.Maximize();
-        }
-        [OneTimeTearDown]
-        public void Close()
-        {
-            // Close the browser
-           // driver.Quit();
+            [SetUp]
+            public void Setup()
+            {
+                driver = new ChromeDriver();
+                driver.Manage().Window.Maximize();
+                homePage = new HomePage(driver);
+                modernWorkPage = new ModernPage(driver);
+            }
+
+            [Test]
+            public void TestHomePage()
+            {
+                homePage.LaunchSpanishPointWebsite();
+                ModernPage modernPage = homePage.NavigateToModern();
+                modernWorkPage.ScrapeContentPage();
+                // Additional assertions or test steps related to the home page
+            }
+
+            
+            [TearDown]
+            public void Teardown()
+            {
+                //driver.Quit();
+            }
         }
     }
 }
