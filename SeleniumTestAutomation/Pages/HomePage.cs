@@ -8,75 +8,61 @@ using System.Threading;
 using System;
 using OpenQA.Selenium.Interactions;
 using System.Collections.ObjectModel;
+using OpenQA.Selenium.Support.UI;
 
 namespace SeleniumTestAutomation
 {
     public class HomePage
     {
-        private readonly IWebDriver driver;
+        private readonly IWebDriver _driver;
 
-        public HomePage(IWebDriver driver)
+        public HomePage(IWebDriver driver) // parameterised constructor for HomePage setting the private _driver
         {
-            this.driver = driver;
+            _driver = driver;
         }
 
-        public void LaunchSpanishPointWebsite()
+        // Declare variables
+        public IWebElement elementToHover => _driver.FindElement(By.XPath("/html/body/div[1]/div/div/ul/li[1]/a/span")); // hover to solution & services      
+        public IWebElement modernElement => _driver.FindElement(By.XPath("/html/body/div[1]/div/div/ul/li[1]/ul/li[1]/a"));// click on Modern work
+        public ReadOnlyCollection<IWebElement> elements => _driver.FindElements(By.XPath("/html/body/div[2]/div[1]/section/section/div[3]/div/div/div/div[2]/div/div[1]/ul/li[2]/a/span"));// to check if the navigation to the new page is successful
+
+        // Methods
+        public IWebDriver LaunchSpanishPointWebsite(int maxRetries,string url)
         {
-            string jsonText = File.ReadAllText("C:\\Users\\chama\\Desktop\\Selenium\\SeleniumTestAutomation\\SeleniumTestAutomation\\jsconfig1.json");
-            JsonDocument jsonDocument = JsonDocument.Parse(jsonText);
-            JsonElement rootElement = jsonDocument.RootElement;
-            JsonElement propertyValue = rootElement.GetProperty("url");
-            string value = propertyValue.GetString();
-            jsonDocument.Dispose();
-            int maxRetries = 3;
+            
             int retryCount = 0;
             bool success = false;
-            while (retryCount < maxRetries && !success)
+            while (retryCount < maxRetries && !success)// page launch retry mechanism
             {
                 try
                 {
-                    driver.Navigate().GoToUrl(value);
+                    _driver.Navigate().GoToUrl(url);
                     success = true;
                 }
                 catch (Exception ex)
                 {
-                    Console.WriteLine("Error occurred during navigation: " + ex.Message);
                     retryCount++;
                 }
             }
 
             if (success)
             {
-                Console.WriteLine("Navigation successful.");
-                Assert.AreEqual("Spanish Point Technologies Ltd.", driver.Title);
+                return _driver;
             }
             else
             {
-                Console.WriteLine("Navigation failed after maximum retries.");
                 throw new Exception("Navigation failed after maximum retries.");
             }
         }
 
-        public ModernPage NavigateToModern()
+        public int NavigateToModern()
         {
-            
-            IWebElement elementToHover = driver.FindElement(By.XPath("/html/body/div[1]/div/div/ul/li[1]/a/span"));
-            Actions actions = new Actions(driver);
+            Actions actions = new Actions(_driver);
             actions.MoveToElement(elementToHover).Perform();
-            Thread.Sleep(TimeSpan.FromSeconds(2));
-            IWebElement modernElement = driver.FindElement(By.XPath("/html/body/div[1]/div/div/ul/li[1]/ul/li[1]/a"));
+            Thread.Sleep(TimeSpan.FromSeconds(1));
             modernElement.Click();
-            ReadOnlyCollection<IWebElement> elements = driver.FindElements(By.XPath("/html/body/div[2]/div[1]/section/section/div[3]/div/div/div/div[2]/div/div[1]/ul/li[2]/a/span"));
-
-            if (elements.Count > 0)
-            {
-                Console.WriteLine("Element exists.");
-            }
-            else
-            {
-                Console.WriteLine("Element does not exist.");
-            }
-            return new ModernPage(driver);
+            return elements.Count;
+            
         }
 
     }

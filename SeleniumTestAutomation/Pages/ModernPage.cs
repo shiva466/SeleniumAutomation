@@ -1,5 +1,6 @@
 ﻿using NUnit.Framework;
 using OpenQA.Selenium;
+using OpenQA.Selenium.Chrome;
 using OpenQA.Selenium.Interactions;
 using OpenQA.Selenium.Support.UI;
 using System;
@@ -14,27 +15,41 @@ namespace SeleniumTestAutomation.InitialClass
 {
     public class ModernPage
     {
-        private readonly IWebDriver driver;
+        private readonly IWebDriver _driver;
 
         public ModernPage(IWebDriver driver)
         {
-            this.driver = driver;
+            _driver = driver;
         }
 
-        public void ScrapeContentPage()
+        public IWebElement modernElement1 => _driver.FindElement(By.XPath("/html/body/div[2]/div[1]/section/section/div[3]/div/div/div/div[2]/div/div[1]/ul/li[2]/a/span"));
+        public IWebElement header => _driver.FindElement(By.XPath("/html/body/div[2]/div[1]/section/section/div[3]/div/div/div/div[2]/div/div[2]/div/div[2]/div[2]/div/div[2]/div/div/h3"));
+        public IWebElement description => _driver.FindElement(By.XPath("/html/body/div[2]/div[1]/section/section/div[3]/div/div/div/div[2]/div/div[2]/div/div[2]/div[2]/div/div[2]/div/div/div[1]/div/p"));
+
+
+        public List<string> ScrapeContentPage()
         {
-            IWebElement modernElement1 = driver.FindElement(By.XPath("/html/body/div[2]/div[1]/section/section/div[3]/div/div/div/div[2]/div/div[1]/ul/li[2]/a/span"));
-            modernElement1.Click();
-            IJavaScriptExecutor jsExecutor = (IJavaScriptExecutor)driver;
-            jsExecutor.ExecuteScript("arguments[0].scrollIntoView();", modernElement1);
-            
-            Thread.Sleep(TimeSpan.FromSeconds(2));
-            IWebElement header = driver.FindElement(By.XPath("/html/body/div[2]/div[1]/section/section/div[3]/div/div/div/div[2]/div/div[2]/div/div[2]/div[2]/div/div[2]/div/div/h3"));
-            IWebElement description = driver.FindElement(By.XPath("/html/body/div[2]/div[1]/section/section/div[3]/div/div/div/div[2]/div/div[2]/div/div[2]/div[2]/div/div[2]/div/div/div[1]/div/p"));
-            Console.WriteLine(header.Text);
-            Console.WriteLine(description.Text);
-            Assert.AreEqual("Content & Collaboration", header.Text);
-            Assert.IsTrue(description.Text.StartsWith("Spanish Point customers tell us that people are their most important asset"));
+            try
+            {
+                modernElement1.Click();
+                Thread.Sleep(TimeSpan.FromSeconds(1));
+                IJavaScriptExecutor jsExecutor = (IJavaScriptExecutor)_driver;
+                jsExecutor.ExecuteScript("arguments[0].scrollIntoView();", modernElement1);
+                Thread.Sleep(TimeSpan.FromSeconds(1));
+                List<string> result = new List<string>();
+                result.Add(header.Text);
+                result.Add(description.Text);
+                return result;
+
+            }
+            catch ( Exception ex)
+            {
+                return new List<string>() {"Exception in Scraping Content due to :"+ex.Message};
+            }
+
+            //===================================================================
+            // ALTERNATE APPROACH TO SCRAPE TEXT IN WEBPAGE USING JAVA SCRIPT
+            //===================================================================
             //IJavaScriptExecutor js = (IJavaScriptExecutor)driver;
             //String texttemp = (String)js.ExecuteScript("return document.getElementsByClassName('vc_custom_heading wpb_animate_when_almost_visible wpb_fadeIn fadeIn vc_custom_1632996631435 wpb_start_animation animated')[0].innerText;");
             //Assert.AreEqual("Content & Collaboration", texttemp);
