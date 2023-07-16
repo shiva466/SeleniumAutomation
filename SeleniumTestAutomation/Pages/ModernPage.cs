@@ -34,7 +34,7 @@ namespace SeleniumTestAutomation.InitialClass
                 modernElementContent.Click();
                 Thread.Sleep(TimeSpan.FromSeconds(1));
                 IJavaScriptExecutor jsExecutor = (IJavaScriptExecutor)_driver;
-                jsExecutor.ExecuteScript("arguments[0].scrollIntoView();", modernElement1);
+                jsExecutor.ExecuteScript("arguments[0].scrollIntoView();", modernElementContent);
                 Thread.Sleep(TimeSpan.FromSeconds(1));
                 List<string> result = new List<string>();
                 result.Add(header.Text);
