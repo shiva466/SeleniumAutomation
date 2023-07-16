@@ -4237,11 +4237,11 @@
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "C:\\Users\\chama\\Desktop\\Selenium\\SeleniumTestAutomation\\SeleniumTestAutomation\\SeleniumTestAutomation.csproj",
+      "projectUniqueName": "C:\\Users\\chama\\Desktop\\Selenium\\SeleniumAutomation\\SeleniumTestAutomation\\SeleniumTestAutomation.csproj",
       "projectName": "SeleniumTestAutomation",
-      "projectPath": "C:\\Users\\chama\\Desktop\\Selenium\\SeleniumTestAutomation\\SeleniumTestAutomation\\SeleniumTestAutomation.csproj",
+      "projectPath": "C:\\Users\\chama\\Desktop\\Selenium\\SeleniumAutomation\\SeleniumTestAutomation\\SeleniumTestAutomation.csproj",
       "packagesPath": "C:\\Users\\chama\\.nuget\\packages\\",
-      "outputPath": "C:\\Users\\chama\\Desktop\\Selenium\\SeleniumTestAutomation\\SeleniumTestAutomation\\obj\\",
+      "outputPath": "C:\\Users\\chama\\Desktop\\Selenium\\SeleniumAutomation\\SeleniumTestAutomation\\obj\\",
       "projectStyle": "PackageReference",
       "configFilePaths": [
         "C:\\Users\\chama\\AppData\\Roaming\\NuGet\\NuGet.Config",

@@ -1,8 +1,8 @@
 {
   "version": 2,
-  "dgSpecHash": "mpbDHEPSthLoh+RAAOws5r65ictWCEODERrqLcLJCTFjEWqkqvhkPR4/8HTD+YhhWfSwDI4LUltg89adMH/xSw==",
+  "dgSpecHash": "F+l9K8ZoxclhEg6fUY7gUma+mbj7QEs4B7brSeviw7vi7o5f6PKmIFH9HX+HrHbPFn8RUAwaDEoqlHtZ/Hh4jA==",
   "success": true,
-  "projectFilePath": "C:\\Users\\chama\\Desktop\\Selenium\\SeleniumTestAutomation\\SeleniumTestAutomation\\SeleniumTestAutomation.csproj",
+  "projectFilePath": "C:\\Users\\chama\\Desktop\\Selenium\\SeleniumAutomation\\SeleniumTestAutomation\\SeleniumTestAutomation.csproj",
   "expectedPackageFiles": [
     "C:\\Users\\chama\\.nuget\\packages\\coverlet.collector\\3.0.2\\coverlet.collector.3.0.2.nupkg.sha512",
     "C:\\Users\\chama\\.nuget\\packages\\microsoft.codecoverage\\16.9.4\\microsoft.codecoverage.16.9.4.nupkg.sha512",
