@@ -22,7 +22,7 @@ namespace SeleniumTestAutomation.InitialClass
             _driver = driver;
         }
 
-        public IWebElement modernElement1 => _driver.FindElement(By.XPath("/html/body/div[2]/div[1]/section/section/div[3]/div/div/div/div[2]/div/div[1]/ul/li[2]/a/span"));
+        public IWebElement modernElementContent => _driver.FindElement(By.XPath("/html/body/div[2]/div[1]/section/section/div[3]/div/div/div/div[2]/div/div[1]/ul/li[2]/a/span"));
         public IWebElement header => _driver.FindElement(By.XPath("/html/body/div[2]/div[1]/section/section/div[3]/div/div/div/div[2]/div/div[2]/div/div[2]/div[2]/div/div[2]/div/div/h3"));
         public IWebElement description => _driver.FindElement(By.XPath("/html/body/div[2]/div[1]/section/section/div[3]/div/div/div/div[2]/div/div[2]/div/div[2]/div[2]/div/div[2]/div/div/div[1]/div/p"));
 
@@ -31,7 +31,7 @@ namespace SeleniumTestAutomation.InitialClass
         {
             try
             {
-                modernElement1.Click();
+                modernElementContent.Click();
                 Thread.Sleep(TimeSpan.FromSeconds(1));
                 IJavaScriptExecutor jsExecutor = (IJavaScriptExecutor)_driver;
                 jsExecutor.ExecuteScript("arguments[0].scrollIntoView();", modernElement1);
