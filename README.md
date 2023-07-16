@@ -8,7 +8,7 @@ Else, download the appropraite chrome driver(according to the browser version an
 
 
 ### Set-Up Steps
-1. clone the project "**"
+1. clone the project "*https://github.com/shiva466/SeleniumAutomation.git*"
 2. Open the code in Visual Studio 2019 or above.
 3. Build the code and run the tests.
 
